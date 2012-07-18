@@ -1,0 +1,86 @@
+﻿<UserControl x:Name="userControl" x:Class="BingImageSearch.PreferencesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:BingImageSearch.Converters"
+    DataContext="{Binding PreferencesViewModel, Source={StaticResource ViewModelLocator}}"
+    Loaded="Page_Loaded" Unloaded="Page_Unloaded"
+    mc:Ignorable="d"
+    d:DesignHeight="768" d:DesignWidth="1024" Margin="0,0,-351,0" >
+
+    <UserControl.Resources>
+        <converters:ResultSizeEnumToStringConverter x:Key="ResultSizeEnumToStringConverter" />
+        <converters:RatingEnumToStringConverter x:Key="RatingEnumToStringConverter" />
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+    	<VisualStateManager.VisualStateGroups>
+    		<VisualStateGroup x:Name="OpeningGroups">
+    			<VisualState x:Name="PreferencesOpened">
+    				<Storyboard>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Overlay">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Visibility>Visible</Visibility>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    					<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="userControl">
+    						<DiscreteObjectKeyFrame KeyTime="0">
+    							<DiscreteObjectKeyFrame.Value>
+    								<Thickness>0</Thickness>
+    							</DiscreteObjectKeyFrame.Value>
+    						</DiscreteObjectKeyFrame>
+    					</ObjectAnimationUsingKeyFrames>
+    				</Storyboard>
+    			</VisualState>
+    			<VisualState x:Name="PreferencesClosed"/>
+    		</VisualStateGroup>
+    	</VisualStateManager.VisualStateGroups>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="351" />
+        </Grid.ColumnDefinitions>
+
+        <Rectangle x:Name="Overlay" Fill="#00FFFFFF" Visibility="Collapsed" Tapped="Overlay_Tapped"  />
+
+        <Border x:Name="Pane" Grid.Column="1" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" BorderThickness="1,0,0,0">
+            <Border.Transitions>
+                <TransitionCollection>
+                    <RepositionThemeTransition />
+                </TransitionCollection>
+            </Border.Transitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="BackButton" Style="{StaticResource SnappedBackButtonStyle}" Click="BackButton_Click" />
+                <TextBlock x:Name="PageTitle" Text="Preferences" Style="{StaticResource SnappedPageHeaderTextStyle}" Grid.Column="1" />
+            </Grid>
+
+            <StackPanel Grid.Row="1" Margin="16">
+                <TextBlock Text="Number of Items to Show:" Style="{StaticResource BasicTextStyle}" />
+                <RadioButton GroupName="NumberOfItemsToShow" Content="20" IsChecked="{Binding ImageResultSize, Converter={StaticResource ResultSizeEnumToStringConverter}, ConverterParameter=Twenty, Mode=TwoWay}" />
+                <RadioButton GroupName="NumberOfItemsToShow" Content="40" IsChecked="{Binding ImageResultSize, Converter={StaticResource ResultSizeEnumToStringConverter}, ConverterParameter=Forty, Mode=TwoWay}" />
+                <RadioButton GroupName="NumberOfItemsToShow" Content="100" IsChecked="{Binding ImageResultSize, ConverterParameter=OneHundred, Converter={StaticResource ResultSizeEnumToStringConverter}, Mode=TwoWay}" />
+
+                <TextBlock Text="Rating:" Style="{StaticResource BasicTextStyle}" Margin="0,20,0,0" />
+                <RadioButton GroupName="Rating" Content="Safe" IsChecked="{Binding Rating, Converter={StaticResource RatingEnumToStringConverter}, ConverterParameter=Strict, Mode=TwoWay}" />
+                <RadioButton GroupName="Rating" Content="Moderate" IsChecked="{Binding Rating, Converter={StaticResource RatingEnumToStringConverter}, ConverterParameter=Moderate, Mode=TwoWay}" />
+                <RadioButton GroupName="Rating" Content="Explicit" IsChecked="{Binding Rating, Converter={StaticResource RatingEnumToStringConverter}, ConverterParameter=Off, Mode=TwoWay}" />
+				
+				<Button Content="Reset History" Command="{Binding ResetHistoryCommand}" Margin="0,20,0,0" />
+            </StackPanel>
+        </Grid>
+        </Border>
+    </Grid>
+
+</UserControl>

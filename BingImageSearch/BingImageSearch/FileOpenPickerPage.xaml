@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="BingImageSearch.FileOpenPickerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             DataContext="{Binding FileOpenPickerPageViewModel, Source={StaticResource ViewModelLocator}}"
+    mc:Ignorable="d"
+    d:DesignWidth="1366" d:DesignHeight="600">
+
+    <UserControl.Resources>
+
+        <CollectionViewSource x:Name="CollectionViewSource" x:Key="CollectionViewSource" Source="{Binding Images}" />
+
+        <DataTemplate x:Key="ThumbnailItemTemplate">
+            <Grid HorizontalAlignment="Left" Height="180" Width="180">
+                <Border Style="{StaticResource ImagePlaceHolderStyle}">
+                    <Image Source="{Binding Thumbnail.MediaUrl}" Margin="0" Stretch="UniformToFill"/>
+                </Border>
+            </Grid>
+        </DataTemplate>
+        
+    </UserControl.Resources>
+
+    <!-- Page Content -->
+
+    <Grid x:Name="LayoutRoot"  Style="{StaticResource LayoutRootGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="87" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+    
+        <Grid VerticalAlignment="Center" Margin="120,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Text="{Binding SearchQuery, Mode=TwoWay}" />
+            <Button x:Name="SearchButton" Content="Search" Command="{Binding SearchCommand}" Margin="12,0,60,0" Grid.Column="1" />
+        </Grid>
+    
+        <Grid x:Name="ItemPickerContentPanel" Grid.Row="1" Margin="120,0,0,34">
+            <GridView x:Name="ItemGridView" 
+                ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" 
+                ItemTemplate="{StaticResource ThumbnailItemTemplate}"
+                ItemContainerStyle="{StaticResource GridTileStyle}"
+                BorderThickness="0" VerticalAlignment="Stretch" 
+                Grid.Row="1"
+                SelectionMode="Multiple"
+                SelectionChanged="ItemGridView_SelectionChanged" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="38004Nuology.BingImageSearch" Publisher="CN=4A9A8C64-B7CA-47DC-B455-CD0502DF2B2C" Version="1.0.0.9" />
+  <Properties>
+    <DisplayName>Bing Image Search</DisplayName>
+    <PublisherDisplayName>Nuology</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+    <Description>BingImageSearch</Description>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2</OSMinVersion>
+    <OSMaxVersionTested>6.2</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="BingImageSearch.App">
+      <VisualElements DisplayName="Bing Image Search" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo-transparent.png" Description="Bing Image Search is a demo app for the Getting Started with Metro Apps book for O'Reilly." ForegroundText="light" BackgroundColor="#007fc6" ToastCapable="true">
+        <DefaultTile ShowName="allLogos" WideLogo="Assets\WideLogo.png" ShortName="Bing Image" />
+        <SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#007fc6" />
+        <InitialRotationPreference>
+          <Rotation Preference="portrait" />
+          <Rotation Preference="landscape" />
+          <Rotation Preference="portraitFlipped" />
+          <Rotation Preference="landscapeFlipped" />
+        </InitialRotationPreference>
+      </VisualElements>
+      <Extensions>
+        <Extension Category="windows.search" />
+        <Extension Category="windows.fileOpenPicker">
+          <FileOpenPicker>
+            <SupportedFileTypes>
+              <FileType>.jpg</FileType>
+              <FileType>.png</FileType>
+              <FileType>.gif</FileType>
+            </SupportedFileTypes>
+          </FileOpenPicker>
+        </Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>
