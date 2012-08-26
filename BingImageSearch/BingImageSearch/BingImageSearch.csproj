@@ -343,12 +343,8 @@
     <Reference Include="MetroIoc">
       <HintPath>..\..\Lib\MetroIoc.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.OData.Metro">
-      <HintPath>C:\Program Files (x86)\Microsoft WCF Data Services\5.0\bin\Metro\Microsoft.Data.OData.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.Services.Client.Metro">
-      <HintPath>C:\Program Files (x86)\Microsoft WCF Data Services\5.0\bin\Metro\Microsoft.Data.Services.Client.Metro.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.Data.OData.WindowsStore, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Data.Services.Client.WindowsStore, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NotificationsExtensions\NotificationsExtensions.csproj">

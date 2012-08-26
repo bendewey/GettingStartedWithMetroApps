@@ -137,13 +137,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Data.OData.Metro, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Microsoft WCF Data Services\5.0\bin\Metro\Microsoft.Data.OData.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.Services.Client.Metro">
-      <HintPath>C:\Program Files (x86)\Microsoft WCF Data Services\5.0\bin\Metro\Microsoft.Data.Services.Client.Metro.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.Data.OData.WindowsStore, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Data.Services.Client.WindowsStore, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
